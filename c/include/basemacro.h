@@ -13,6 +13,12 @@
 #define MIN(x, y)               (((x) <= (y)) ? (x) : (y))
 #define MAX(x, y)               (((x) >= (y)) ? (x) : (y))
 
+#define WRAP_INC(var, max)      var = var + 1 < max ? var + 1 : 0
+#define WRAP_DEC(var, max)      var = var     > 0   ? var - 1 : max - 1
+#define WRAP_ADD(var, val, max) var = val < max ? (var < max - val ? var + val : var - (max - val)) \
+                                                : (var + val % max) % max
+#define WRAP_SUB(var, val, max) var = val < max ? (var >= val ? var - val : max - val + var) \
+                                                : (max + var - val % max) % max
 
 
 
@@ -96,6 +102,15 @@
 #define BUF_NUM_USED(wi, ri, num)               ((wi) >= (ri) ? (wi) - (ri) : (num) - (ri) + (wi))
 #define BUF_NUM_IDLE(wi, ri, num)               ((wi) <  (ri) ? (ri) - (wi) - 1 : (num) - 1 - (wi) + (ri))
 
+
+/**
+ * container_of - cast a member of a structure out to the containing structure
+ * @ptr:    the pointer to the member.
+ * @type:   the type of the container struct this is embedded in.
+ * @member: the name of the member within the struct.
+ */
+#define offsetof(type, member)                  ((size_t)&((type*)0)->member)
+#define container_of(ptr, type, member)         ((type*)((char*)(ptr) - offsetof(type, member)))
 
 /** for_each_* */
 #define for_each_array(p, a)                    for(p = a;    p < a + ARRAY_ELEMENTS(a);              (p)++)
