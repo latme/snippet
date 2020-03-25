@@ -7,6 +7,8 @@
 #define BASEMACRO_H_
 
 
+#define ARRAY_ELEMENTS(a)       (sizeof(a) / sizeof(a[0]))
+
 
 #define MIN(x, y)               (((x) <= (y)) ? (x) : (y))
 #define MAX(x, y)               (((x) >= (y)) ? (x) : (y))
@@ -93,6 +95,21 @@
 #define BUF_IS_FULL (wi, ri, num)               ((wi) + 1 == (ri) || (wi) - (ri) == (num) - 1)
 #define BUF_NUM_USED(wi, ri, num)               ((wi) >= (ri) ? (wi) - (ri) : (num) - (ri) + (wi))
 #define BUF_NUM_IDLE(wi, ri, num)               ((wi) <  (ri) ? (ri) - (wi) - 1 : (num) - 1 - (wi) + (ri))
+
+
+/** for_each_* */
+#define for_each_array(p, a)                    for(p = a;    p < a + ARRAY_ELEMENTS(a);              (p)++)
+#define for_each_array_p(i, p, a)               for(p = a, i = 0; i < ARRAY_ELEMENTS(a);              (p)++, (i)++)
+#define for_each_array_e(i, e, a)               for(       i = 0; i < ARRAY_ELEMENTS(a) && (e = a[i], TRUE); (i)++)
+#define for_each_table(p, t, n)                 for(p = t;    p < t + (n);          (p)++)
+#define for_each_table_p(i, p, t, n)            for(p = t, i = 0; i < (n);          (p)++, (i)++)
+#define for_each_table_e(i, e, t, n)            for(       i = 0; i < (n) && (e = (t)[i]); (i)++)
+#define for_each_tabnn(p, t)                    for(p = t;        ;            (p)++)
+#define for_each_tabnn_p(i, p, t)               for(p = t, i = 0; ;            (p)++, (i)++)
+#define for_each_tabnn_e(i, e, t)               for(       i = 0; (e = (t)[i], TRUE); (i)++)
+#define for_each_seq(i, base, top)              for(i = base; i < top; (i)++)
+
+
 
 
 
