@@ -1,16 +1,17 @@
 
 # 判断系统是否为WINDOWS，利用WINDOWS特有的环境变量：
-# WINDIR=C:\Windows
-# OS=OS=Windows_NT
+# OS=Windows_NT
 # HOMEDRIVE=C:
 # HOMEPATH=\Users\xuyi
 # SystemDrive=C:
 # SystemRoot=C:\Windows
+# windir=C:\Windows
 #
-ifdef WINDIR
-CP      := ./bin.bat cp
-RM      := ./bin.bat rm
-MKDIR   := ./bin.bat mkdir
+ifeq ($(OS), Windows_NT)
+BIN     := .\bin.bat
+CP      := $(BIN) cp
+RM      := $(BIN) rm
+MKDIR   := $(BIN) mkdir
 MAKE    := make
 else    
 CP      := cp -f

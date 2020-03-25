@@ -21,7 +21,9 @@ set ec=
 if "%cmd%"=="cp" (
 	set src=%1
 	set dst=%2
-	%ec% copy /y !src:/=\! !dst:/=\! >nul
+	set src=!src:/=\!
+	set dst=!dst:/=\!
+	%ec% copy /y !src! !dst! >nul
 
 	goto :EOF
 )
@@ -45,7 +47,8 @@ if "%cmd%"=="mkdir" (
 	set dir=%1
 	if "!dir!"=="" goto :EOF
 	
-	%ec% mkdir !dir:/=\! 2>nul
+	set dir=!dir:/=\!
+	%ec% mkdir !dir! 2>nul
 
 	shift /1
 	goto :_loop_mkdir
