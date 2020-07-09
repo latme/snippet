@@ -1,0 +1,19 @@
+# file: ~/.ssh/config
+
+Host fisheep.cc
+	HostName fisheep.cc
+	User ian
+	IdentityFile ~/.ssh/id_rsa_fisheep.ian
+	Match User git
+	IdentityFile ~/.ssh/id_rsa_fisheep
+
+Host github.com
+	HostName github.com
+	Match User git
+	IdentityFile ~/.ssh/id_rsa_github
+
+Host gitee.com
+	HostName gitee.com
+	Match User git
+	IdentityFile ~/.ssh/id_rsa_gitee
+
