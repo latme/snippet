@@ -17,6 +17,7 @@ git config --global alias.lo  'log --graph --decorate --oneline'
 git config --global alias.lp  'log --graph --decorate -p'
 git config --global alias.ln  'log --graph --decorate --name-status'
 git config --global alias.sn  'show --name-status'
+git config --global alias.dn  'diff --name-status'
 git config --global alias.cp  cherry-pick
 git config --global alias.fp  format-patch
 
