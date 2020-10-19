@@ -6,8 +6,12 @@
  * __TIME__
  *
  */
-#ifndef PRINT_H_
-#define PRINT_H_
+#ifndef __PRINT_H__
+#define __PRINT_H__
+
+
+#include <basemacros.h>
+
 
 typedef enum
 {
@@ -41,5 +45,5 @@ typedef enum
 extern E_PrintLevel gePrintLevel;
 
 
-#endif  /* PRINT_H_ */
+#endif  /* __PRINT_H__ */
 
