@@ -21,3 +21,13 @@ git config --global alias.dn  'diff --name-status'
 git config --global alias.cp  cherry-pick
 git config --global alias.fp  format-patch
 
+# change the default editor to vim
+git config --global core.editor vim
+
+# solve the Chinese garbled problem
+git config --global core.quotepath false
+
+
+## the server holds the public key file
+# ~/.ssh/authorized_keys
+
