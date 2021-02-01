@@ -1,151 +1,82 @@
-/*
- * filename: basemacro.h
+/**
+ * file: latmacros.h
  */
 
 
-#ifndef __BASEMACRO_H__
-#define __BASEMACRO_H__
+#ifndef __LATMACROS_H__
+#define __LATMACROS_H__
 
-
-#define TRUE                    1
-#define FALSE                   0
-#define NULL                    (void*)0
 
 
 /***********************************************************************************************************************
  * bit relevant macros
  **********************************************************************************************************************/
 /** constant size */
-#define SIZE_1B                 (size_t)0x00000001UL
-#define SIZE_2B                 (size_t)0x00000002UL
-#define SIZE_4B                 (size_t)0x00000004UL
-#define SIZE_8B                 (size_t)0x00000008UL
-#define SIZE_16B                (size_t)0x00000010UL
-#define SIZE_32B                (size_t)0x00000020UL
-#define SIZE_64B                (size_t)0x00000040UL
-#define SIZE_128B               (size_t)0x00000080UL
-#define SIZE_256B               (size_t)0x00000100UL
-#define SIZE_512B               (size_t)0x00000200UL
-#define SIZE_1KB                (size_t)0x00000400UL
-#define SIZE_2KB                (size_t)0x00000800UL
-#define SIZE_4KB                (size_t)0x00001000UL
-#define SIZE_8KB                (size_t)0x00002000UL
-#define SIZE_16KB               (size_t)0x00004000UL
-#define SIZE_32KB               (size_t)0x00008000UL
-#define SIZE_64KB               (size_t)0x00010000UL
-#define SIZE_128KB              (size_t)0x00020000UL
-#define SIZE_256KB              (size_t)0x00040000UL
-#define SIZE_512KB              (size_t)0x00080000UL
-#define SIZE_1MB                (size_t)0x00100000UL
-#define SIZE_2MB                (size_t)0x00200000UL
-#define SIZE_4MB                (size_t)0x00400000UL
-#define SIZE_8MB                (size_t)0x00800000UL
-#define SIZE_16MB               (size_t)0x01000000UL
-#define SIZE_32MB               (size_t)0x02000000UL
-#define SIZE_64MB               (size_t)0x04000000UL
-#define SIZE_128MB              (size_t)0x08000000UL
-#define SIZE_256MB              (size_t)0x10000000UL
-#define SIZE_512MB              (size_t)0x20000000UL
-#define SIZE_1GB                (size_t)0x40000000UL
-#define SIZE_2GB                (size_t)0x80000000UL
-#define SIZE_4GB                (size_t)0x0000000100000000ULL
-#define SIZE_8GB                (size_t)0x0000000200000000ULL
-#define SIZE_16GB               (size_t)0x0000000400000000ULL
-#define SIZE_32GB               (size_t)0x0000000800000000ULL
-#define SIZE_64GB               (size_t)0x0000001000000000ULL
-#define SIZE_128GB              (size_t)0x0000002000000000ULL
-#define SIZE_256GB              (size_t)0x0000004000000000ULL
-#define SIZE_512GB              (size_t)0x0000008000000000ULL
-#define SIZE_1TB                (size_t)0x0000010000000000ULL
-#define SIZE_2TB                (size_t)0x0000020000000000ULL
-#define SIZE_4TB                (size_t)0x0000040000000000ULL
-#define SIZE_8TB                (size_t)0x0000080000000000ULL
-#define SIZE_16TB               (size_t)0x0000100000000000ULL
-#define SIZE_32TB               (size_t)0x0000200000000000ULL
-#define SIZE_64TB               (size_t)0x0000400000000000ULL
-#define SIZE_128TB              (size_t)0x0000800000000000ULL
-#define SIZE_256TB              (size_t)0x0001000000000000ULL
-#define SIZE_512TB              (size_t)0x0002000000000000ULL
-#define SIZE_1PB                (size_t)0x0004000000000000ULL
-#define SIZE_2PB                (size_t)0x0008000000000000ULL
-#define SIZE_4PB                (size_t)0x0010000000000000ULL
-#define SIZE_8PB                (size_t)0x0020000000000000ULL
-#define SIZE_16PB               (size_t)0x0040000000000000ULL
-#define SIZE_32PB               (size_t)0x0080000000000000ULL
-#define SIZE_64PB               (size_t)0x0100000000000000ULL
-#define SIZE_128PB              (size_t)0x0200000000000000ULL
-#define SIZE_256PB              (size_t)0x0400000000000000ULL
-#define SIZE_512PB              (size_t)0x0800000000000000ULL
-#define SIZE_1EB                (size_t)0x1000000000000000ULL
-#define SIZE_2EB                (size_t)0x2000000000000000ULL
-#define SIZE_4EB                (size_t)0x4000000000000000ULL
-#define SIZE_8EB                (size_t)0x8000000000000000ULL
+#define SIZE_1B                 0x00000001UL
+#define SIZE_2B                 0x00000002UL
+#define SIZE_4B                 0x00000004UL
+#define SIZE_8B                 0x00000008UL
+#define SIZE_16B                0x00000010UL
+#define SIZE_32B                0x00000020UL
+#define SIZE_64B                0x00000040UL
+#define SIZE_128B               0x00000080UL
+#define SIZE_256B               0x00000100UL
+#define SIZE_512B               0x00000200UL
+#define SIZE_1KB                0x00000400UL
+#define SIZE_2KB                0x00000800UL
+#define SIZE_4KB                0x00001000UL
+#define SIZE_8KB                0x00002000UL
+#define SIZE_16KB               0x00004000UL
+#define SIZE_32KB               0x00008000UL
+#define SIZE_64KB               0x00010000UL
+#define SIZE_128KB              0x00020000UL
+#define SIZE_256KB              0x00040000UL
+#define SIZE_512KB              0x00080000UL
+#define SIZE_1MB                0x00100000UL
+#define SIZE_2MB                0x00200000UL
+#define SIZE_4MB                0x00400000UL
+#define SIZE_8MB                0x00800000UL
+#define SIZE_16MB               0x01000000UL
+#define SIZE_32MB               0x02000000UL
+#define SIZE_64MB               0x04000000UL
+#define SIZE_128MB              0x08000000UL
+#define SIZE_256MB              0x10000000UL
+#define SIZE_512MB              0x20000000UL
+#define SIZE_1GB                0x40000000UL
+#define SIZE_2GB                0x80000000UL
+#define SIZE_4GB                0x0000000100000000ULL
+#define SIZE_8GB                0x0000000200000000ULL
+#define SIZE_16GB               0x0000000400000000ULL
+#define SIZE_32GB               0x0000000800000000ULL
+#define SIZE_64GB               0x0000001000000000ULL
+#define SIZE_128GB              0x0000002000000000ULL
+#define SIZE_256GB              0x0000004000000000ULL
+#define SIZE_512GB              0x0000008000000000ULL
+#define SIZE_1TB                0x0000010000000000ULL
+#define SIZE_2TB                0x0000020000000000ULL
+#define SIZE_4TB                0x0000040000000000ULL
+#define SIZE_8TB                0x0000080000000000ULL
+#define SIZE_16TB               0x0000100000000000ULL
+#define SIZE_32TB               0x0000200000000000ULL
+#define SIZE_64TB               0x0000400000000000ULL
+#define SIZE_128TB              0x0000800000000000ULL
+#define SIZE_256TB              0x0001000000000000ULL
+#define SIZE_512TB              0x0002000000000000ULL
+#define SIZE_1PB                0x0004000000000000ULL
+#define SIZE_2PB                0x0008000000000000ULL
+#define SIZE_4PB                0x0010000000000000ULL
+#define SIZE_8PB                0x0020000000000000ULL
+#define SIZE_16PB               0x0040000000000000ULL
+#define SIZE_32PB               0x0080000000000000ULL
+#define SIZE_64PB               0x0100000000000000ULL
+#define SIZE_128PB              0x0200000000000000ULL
+#define SIZE_256PB              0x0400000000000000ULL
+#define SIZE_512PB              0x0800000000000000ULL
+#define SIZE_1EB                0x1000000000000000ULL
+#define SIZE_2EB                0x2000000000000000ULL
+#define SIZE_4EB                0x4000000000000000ULL
+#define SIZE_8EB                0x8000000000000000ULL
 
-/** bit(s) width */
-#define BW1                     1U
-#define BW2                     2U
-#define BW3                     3U
-#define BW4                     4U
-#define BW5                     5U
-#define BW6                     6U
-#define BW7                     7U
-#define BW8                     8U
-#define BW9                     9U
-#define BW10                    10U
-#define BW11                    11U
-#define BW12                    12U
-#define BW13                    13U
-#define BW14                    14U
-#define BW15                    15U
-#define BW16                    16U
-#define BW17                    17U
-#define BW18                    18U
-#define BW19                    19U
-#define BW20                    20U
-#define BW21                    21U
-#define BW22                    22U
-#define BW23                    23U
-#define BW24                    24U
-#define BW25                    25U
-#define BW26                    26U
-#define BW27                    27U
-#define BW28                    28U
-#define BW29                    29U
-#define BW30                    30U
-#define BW31                    31U
-#define BW32                    32U
-#define BW33                    33U
-#define BW34                    34U
-#define BW35                    35U
-#define BW36                    36U
-#define BW37                    37U
-#define BW38                    38U
-#define BW39                    39U
-#define BW40                    40U
-#define BW41                    41U
-#define BW42                    42U
-#define BW43                    43U
-#define BW44                    44U
-#define BW45                    45U
-#define BW46                    46U
-#define BW47                    47U
-#define BW48                    48U
-#define BW49                    49U
-#define BW50                    50U
-#define BW51                    51U
-#define BW52                    52U
-#define BW53                    53U
-#define BW54                    54U
-#define BW55                    55U
-#define BW56                    56U
-#define BW57                    57U
-#define BW58                    58U
-#define BW59                    59U
-#define BW60                    60U
-#define BW61                    61U
-#define BW62                    62U
-#define BW63                    63U
-#define BW64                    64U
 
 /** bit(s) mask */
 #define BM1                     0x00000001UL
@@ -368,8 +299,8 @@
 /** align operations */
 /** n must be power of 2 */
 #define IS_POWEROF_2(n)         ( (((n) & ~(n)) == 0))
-#define ALIGN_UP(x, n)          ( (((n) - 1ULL) + (x)) & ~((n) - 1ULL)
-#define ALIGN_DOWN(x, n)        ( ((              (x)) & ~((n) - 1ULL)
+#define ALIGN_UP(x, n)          ( (((n) - 1ULL) + (x)) & ~((n) - 1ULL))
+#define ALIGN_DN(x, n)          ( (               (x)) & ~((n) - 1ULL))
 #define ALIGN_ARCH(x)           ALIGN_UP(sizeof(void*))
 
 
@@ -435,6 +366,7 @@
 #define BUF_NUM_IDLE(wi, ri, num)               ((wi) <  (ri) ? (ri) - (wi) - 1 : (num) - 1 - (wi) + (ri))
 
 
+#ifndef USE_STDDEF_H
 /**
  * container_of - cast a member of a structure out to the containing structure
  * @ptr:    the pointer to the member.
@@ -443,6 +375,7 @@
  */
 #define offsetof(type, member)                  ((size_t)&((type*)0)->member)
 #define container_of(ptr, type, member)         ((type*)((char*)(ptr) - offsetof(type, member)))
+#endif
 
 /** for_each_* */
 #define for_each_array(p, a)                    for(p = a;    p < a + ARRAY_ELEMENTS(a);              (p)++)
@@ -460,5 +393,5 @@
 
 
 
-#endif /* BASEMACRO_H_ */
+#endif /* LATMACROS_H_ */
 

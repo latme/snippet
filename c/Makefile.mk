@@ -5,11 +5,13 @@ CC := gcc
 LD := ld
 OBJDUMP := objdump
 OBJCOPY := objcopy
+export AR AS CC LD OBJDUMP OBJCOPY
 
 CFLAGS  := -O0
 CFLAGS  += -Iinclude
 AFLAGS  :=
 LDFLAGS :=
+export CFLAGS AFLAGS LDFLAGS
 
 
 %.o : %.c
@@ -17,3 +19,4 @@ LDFLAGS :=
 
 %.o : %.S
 	$(AS) $(AFLAGS) -o $@ $<
+
