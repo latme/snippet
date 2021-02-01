@@ -113,5 +113,5 @@ void mem_mr_register(void)
 {
     main_register_appcmd("mr",  "Memory Read", NULL, mem_mr_main);
     main_register_appcmd("mrl", "Memory Read with little-endian", NULL, mem_mr_main);
-    main_register_appcmd("mrb", "Memory Read with big-endian",   NULL, mem_mr_main);
+    main_register_appcmd("mrb", "Memory Read with big-endian",    NULL, mem_mr_main);
 }

@@ -82,7 +82,7 @@ static int mem_mw_main(int argc, char *argv[])
         return -3;
     }
 
-    mem.map_virbase = mmap(NULL, mem.map_len, PROT_READ, MAP_SHARED,
+    mem.map_virbase = mmap(NULL, mem.map_len, PROT_WRITE, MAP_SHARED,
                                  mem.mem_fd, mem.map_phybase);
     if (mem.map_virbase == MAP_FAILED) {
         perror("mmap failed");
@@ -106,6 +106,6 @@ void mem_mw_register(void)
 {
     main_register_appcmd("mw",  "Memory Write", NULL, mem_mw_main);
     main_register_appcmd("mwl", "Memory Write with little-endian", NULL, mem_mw_main);
-    main_register_appcmd("mwb", "Memory Write with big-endian",   NULL, mem_mw_main);
+    main_register_appcmd("mwb", "Memory Write with big-endian",    NULL, mem_mw_main);
 }
 

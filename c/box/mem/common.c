@@ -148,29 +148,31 @@ void mem_mw(void *addr, unsigned long long show_addr,
     {
     case 8:
         *(unsigned long long *)addr = swap_endian ? ENDIAN_SWAP64(unit_value) : unit_value;
+        printf("%016llx = 0x%016llx\n", show_addr, unit_value);
         break;
     case 4:
         unit_value = (unsigned int)unit_value;
         *(unsigned int       *)addr = swap_endian ? ENDIAN_SWAP32(unit_value) : unit_value;
+        printf("%016llx = 0x%08llx\n", show_addr, unit_value);
         break;
     case 2:
         unit_value = (unsigned short)unit_value;
         *(unsigned short     *)addr = swap_endian ? ENDIAN_SWAP16(unit_value) : unit_value;
+        printf("%016llx = 0x%04llx\n", show_addr, unit_value);
         break;
     case 1:
         unit_value = (unsigned char)unit_value;
         *(unsigned char      *)addr = unit_value;
+        printf("%016llx = 0x%02llx\n", show_addr, unit_value);
         break;
     default:
         printf("unit_size must be one of 1,2,4,8\n");
         return;
     }
-
-    printf("%016llx = 0x%llx\n", show_addr, unit_value);
 }
 
 
-void mem_map_align(unsigned long long phyaddr, size_t size, struct mem_mmap *mem)
+void mem_map_align(unsigned long long phyaddr, size_t size, struct mem_map *mem)
 {
     long    page_size;
 
