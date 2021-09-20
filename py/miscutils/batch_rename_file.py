@@ -15,10 +15,14 @@ def rename_files(pattern, replace, dir_path):
         return
 
     for filename in os.listdir(dir_path):
-        filename_new = re.sub(pattern, replace, filename)
-        if filename_new != filename:
-            print(filename + ' -> ' + filename_new)
-            os.rename(os.path.join(dir_path, filename), os.path.join(dir_path, filename_new))
+        filepath = os.path.join(dir_path, filename)
+        if os.path.isdir(filepath):
+            rename_files(pattern, replace, filepath)
+        else:
+            filename_new = re.sub(pattern, replace, filename)
+            if filename_new != filename:
+                print(filename + ' -> ' + filename_new)
+                os.rename(os.path.join(dir_path, filename), os.path.join(dir_path, filename_new))
 
 
 if __name__ == '__main__':
