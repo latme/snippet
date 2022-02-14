@@ -1,0 +1,5 @@
+# /etc/docker/daemon.json    must delete this line!
+{
+    "bip": "192.168.254.1/24",
+    "insecure-registries": ["localhost:5000"]
+}
