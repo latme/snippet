@@ -1,0 +1,12 @@
+# /etc/screenrc
+
+escape ^Jj
+vbell off    # 关闭闪屏（ctrl-a ctrl-g）
+altscreen on # vim退出时不要留文件内容在屏幕
+
+# screen window从1开始编号，默认从0开始
+bind c  screen 1
+bind ^c screen 1
+bind 0  select 10
+screen 1
+
