@@ -8,6 +8,10 @@ endif
 export GIT_SRC_VER
 
 
-CFLAGS += -D GIT_SRC_VER="$(GIT_SRC_VER)"
+CFLAGS += -D GIT_SRC_VER=\"$(GIT_SRC_VER)\"
 
+#const char *get_src_version(void)
+#{
+#    return GIT_SRC_VER;
+#}
 
