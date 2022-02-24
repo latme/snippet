@@ -4,6 +4,10 @@
 #include <latbox/init.h>
 
 
+#define DEVMEM      "/dev/mem"
+#define DEVPORT     "/dev/port"
+
+
 struct mem_map {
     unsigned long long  map_phybase;
     size_t              map_ofst;

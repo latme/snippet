@@ -1,18 +1,22 @@
 
 CFLAGS += -I$(CURDIR)/include
+CFLAGS += -MD -MP -MF $*.d
+#CFLAGS += -MMD -MP -MF $*.d	# do not include standard header file (/usr/include)
 
 
 TARGET := latbox
-OBJS := main.o
-OBJS += mem/common.o mem/cmd_mr.o mem/cmd_mw.o
-
-
+SRCS   := main.c
+SRCS   += mem/common.c mem/cmd_mr.c mem/cmd_mw.c mem/cmd_ior.c mem/cmd_iow.c
+OBJS   := $(SRCS:.c=.o)
+DEPS   := $(SRCS:.c=.d)
 
 
 
 $(TARGET): $(OBJS)
 	$(CC) $(LDFLAGS) -o $@ $^
 
+
+-include $(DEPS)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
@@ -27,5 +31,5 @@ install :
 
 .PHONY : clean
 clean :
-	rm -f $(TARGET) $(OBJS)
+	rm -f $(TARGET) $(OBJS) $(DEPS)
 

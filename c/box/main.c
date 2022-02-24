@@ -5,17 +5,21 @@
 
 
 static unsigned int         g_appcmd_num = 0;
-static struct main_appcmd   g_appcmd_array[10];
+static struct main_appcmd   g_appcmd_array[12];
 
 
 
 void mem_mr_register(void);
 void mem_mw_register(void);
+void mem_ior_register(void);
+void mem_iow_register(void);
 
 static void main_appcmd_register(void)
 {
     mem_mr_register();
     mem_mw_register();
+    mem_ior_register();
+    mem_iow_register();
 }
 
 
