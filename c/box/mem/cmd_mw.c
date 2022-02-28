@@ -15,7 +15,7 @@ static int mem_mw_usage(void)
 {
     printf("\n\
 usage:\n\
-  mw addr unit_size unit_value\n\
+  mw addr unit_size unit_value [mask [l_shift]]\n\
 \n\
   valid unit_size is one of 1,2,4,8;\n\
   a prefix '0x' is needed when unit_value is a hexadecimal.\n\
@@ -26,7 +26,10 @@ usage:\n\
 static int mem_mw_main(int argc, char *argv[])
 {
     unsigned int        unit_size = 0;
+    unsigned int        unit_shift  = 0;
+    unsigned long long  unit_mask   = 0;
     unsigned long long  unit_value  = 0;
+    unsigned long long  unit_tmp;
     bool                endian_swap = FALSE;
     struct mem_map      mem;
     unsigned long long  phyaddr;
@@ -35,31 +38,49 @@ static int mem_mw_main(int argc, char *argv[])
     char                *ptr;
 
 
-    if(argc != 4)
-    {
+    switch (argc) {
+    case 6:
+        arg = argv[5];
+        unit_shift = strtoul(arg, &ptr, 0);
+        if (arg == ptr) {
+            printf( "l_shift (%s) is not a number\n", arg);
+            return -1;
+        }
+        /* fall-through */
+    case 5:
+        arg = argv[4];
+        unit_mask  = strtoull(arg, &ptr, 0);
+        if (arg == ptr) {
+            printf( "mask (%s) is not a number\n", arg);
+            return -1;
+        }
+        /* fall-through */
+    case 4:
+        arg = argv[3];
+        unit_value = strtoull(arg, &ptr, 0);
+        if (arg == ptr) {
+            printf( "unit_value (%s) is not a number\n", arg);
+            return -2;
+        }
+
+        arg = argv[2];
+        unit_size = strtoul(arg, &ptr, 0);
+        if (arg == ptr) {
+            printf( "unit_size (%s) is not a number\n", arg);
+            return -2;
+        }
+
+        arg = argv[1];
+        phyaddr = strtoul(arg, &ptr, 16);
+        if (arg == ptr) {
+            printf( "addr (%s) is not a number\n", arg);
+            return -2;
+        }
+        break;
+
+    default:
         mem_mw_usage();
         return -1;
-    }
-
-    arg = argv[3];
-    unit_value = strtoull(arg, &ptr, 0);
-    if (arg == ptr) {
-        printf( "unit_value (%s) is not a number\n", arg);
-        return -2;
-    }
-
-    arg = argv[2];
-    unit_size = strtoul(arg, &ptr, 0);
-    if (arg == ptr) {
-        printf( "unit_size (%s) is not a number\n", arg);
-        return -2;
-    }
-
-    arg = argv[1];
-    phyaddr = strtoul(arg, &ptr, 16);
-    if (arg == ptr) {
-        printf( "addr (%s) is not a number\n", arg);
-        return -2;
     }
 
     if(strncmp(argv[0], "mwl", 3) == 0)
@@ -90,9 +111,88 @@ static int mem_mw_main(int argc, char *argv[])
         return -4;
     }
 
+    unit_value <<= unit_shift;
+    unit_mask  <<= unit_shift;
+
     ///< write memory
     viraddr = mem.map_virbase + mem.map_ofst;
-    mem_mw(viraddr, phyaddr, unit_size, unit_value, endian_swap);
+    switch(unit_size)
+    {
+    case 8:
+        if (unit_mask != 0) {
+            unit_tmp = *(unsigned long long *)viraddr;
+            if (endian_swap) {
+                unit_tmp = ENDIAN_SWAP64(unit_tmp);
+            }
+
+            unit_value = (unit_tmp & ~unit_mask) | (unit_value & unit_mask);
+        }
+
+        printf("%016llx = 0x%016llx\n", phyaddr, unit_value);
+
+        if (endian_swap) {
+            unit_value = ENDIAN_SWAP64(unit_value);
+        }
+
+        *(unsigned long long *)viraddr = unit_value;
+        break;
+
+    case 4:
+        if (unit_mask != 0) {
+            unit_tmp = *(unsigned int *)viraddr;
+            if (endian_swap) {
+                unit_tmp = ENDIAN_SWAP32(unit_tmp);
+            }
+
+            unit_value = (unit_tmp & ~unit_mask) | (unit_value & unit_mask);
+        }
+
+        unit_value = (unsigned int)unit_value;
+        printf("%016llx = 0x%08llx\n", phyaddr, unit_value);
+
+        if (endian_swap) {
+            unit_value = ENDIAN_SWAP32(unit_value);
+        }
+
+        *(unsigned int *)viraddr = unit_value;
+        break;
+
+    case 2:
+        if (unit_mask != 0) {
+            unit_tmp = *(unsigned short *)viraddr;
+            if (endian_swap) {
+                unit_tmp = ENDIAN_SWAP16(unit_tmp);
+            }
+
+            unit_value = (unit_tmp & ~unit_mask) | (unit_value & unit_mask);
+        }
+
+        unit_value = (unsigned short)unit_value;
+        printf("%016llx = 0x%04llx\n", phyaddr, unit_value);
+
+        if (endian_swap) {
+            unit_value = ENDIAN_SWAP16(unit_value);
+        }
+
+        *(unsigned short *)viraddr = unit_value;
+        break;
+
+    case 1:
+        if (unit_mask != 0) {
+            unit_tmp = *(unsigned char *)viraddr;
+            unit_value = (unit_tmp & ~unit_mask) | (unit_value & unit_mask);
+        }
+
+        unit_value = (unsigned char)unit_value;
+        printf("%016llx = 0x%02llx\n", phyaddr, unit_value);
+
+        *(unsigned char *)viraddr = unit_value;
+        break;
+
+    default:
+        printf("unit_size must be one of 1,2,4,8\n");
+        return -1;
+    }
 
     ///< memory unmap
     munmap(mem.map_virbase, mem.map_len);
