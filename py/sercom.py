@@ -43,7 +43,7 @@ while True:
     if msvcrt.kbhit():
         idle_cnt = 0
         ret = msvcrt.getch()
-        if ret == b'\xe0':
+        if ret == b'\xe0' or ret == b'\00':
             ret = msvcrt.getch()
             if ret in keymap:
                 ret = keymap[ret]
