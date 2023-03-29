@@ -27,11 +27,14 @@ ${array_name[@]}
 获取数组长度的方法与获取字符串长度的方法相同，以下两种方法结果完全相同：
 ${#array_name[*]}
 ${#array_name[@]}
+获取数组索引列表
+${!array_name[*]}
+${!array_name[@]}
 -----------------------------------------
 EOF
 users=(usr1 usr2 usr3 "usr x")
 
-# 遍历数组
+# 遍历数组（不推荐，数组元素包含空格时出错）
 echo \${#users[@]} is ${#users[@]}
 for user in ${users[@]}; do
   echo @: $user
@@ -51,6 +54,12 @@ done
 echo \${#users[*]} is ${#users[*]}
 for idx in $(seq 0 1 $((${#users[*]} - 1))); do
   echo *$idx: ${users[$idx]}
+done
+
+# 遍历数组（推荐）
+echo \${!users[@]} is ${!users[@]}
+for idx in ${!users[@]}; do
+  echo !@$idx: ${users[$idx]}
 done
 
 :<<EOF
@@ -78,5 +87,10 @@ ${#users[*]} is 4
 *1: usr2
 *2: usr3
 *3: usr x
+${!users[@]} is 0 1 2 3
+!@0: usr1
+!@1: usr2
+!@2: usr3
+!@3: usr x
 EOF
 
