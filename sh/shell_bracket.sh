@@ -41,10 +41,10 @@ shell关键字：相比[]，[[]]内的字符都不会发生文件名扩展或单
 代码块（内部组）：与小括号不同的是，不会新建一个进程执行括号内的命令。且第一调命令前必须有空格，最后一条命令后必须有分号。
 
 2. 几种特殊的替换结构
-${var:-string} 如果var为空，结果为string，否则结果为var；
-${var:+string} 如果var为空，结果为var，否则结果为string；
-${var:=string} 如果var为空，结果为string，且var赋值为string，否则结果为var；
-${var:?string} 如果var为空，把string输出到stderr，并从退出脚本，否则结果为var。
+${var:-string} 如果var非空 结果为var；为空 结果为string；
+${var:=string} 如果var非空 结果为var；为空 结果为string，且var赋值为string；
+${var:?string} 如果var非空 结果为var；为空 把string输出到stderr，并从退出脚本；
+${var:+string} 如果var非空 结果为string；为空 结果为空；
 
 3. 四种模式匹配替换结构。例如 var=testcase
 ${var%pattern}  去掉var中右边最短的匹配模式，${var%s*e}结果为testca
@@ -53,10 +53,23 @@ ${var#pattern}  去掉var中左边最短的匹配模式，${var#*s}结果为tcas
 ${var##pattern} 去掉var中左边最长的匹配模式，${var##*s}结果为e
 
 4. 字符串提取和替换
+${#var}                   获取字符串的长度
 ${var:num}                提取第num个字符到末尾的字符。num为正，从左边0处开始；num为负，从右边开始提取，但必须空格分开或括号包围。
 ${var:num1:num2}          从num1位置开始，提取num2个字符，不能为负数。
 ${var/pattern1/pattern2}  把第一个匹配的pattern1替换为pattern2
 ${var//pattern1/pattern2} 把所有匹配的pattern1替换为pattern2
+${var/#pattern1/pattern2} 把头部匹配的pattern1替换为pattern2
+${var/%pattern1/pattern2} 把尾部匹配的pattern1替换为pattern2
+
+5. 匹配变量
+${!var_prefix*}           匹配所有以var_prefix为前缀的变量；
+${!var_prefix@}           同上；
+示例：
+skillAA='AA'
+skillBB='BB'
+testAA='test'
+${!skill*}或${!skill@}的结果为：skillAA skillBB
+
 
 EOF
 
